@@ -10,7 +10,7 @@ def test_get_db_connection():
 
   # Test 1: Check env vars are loaded
 
-  required_vars = ["DB_SERVER", "DB_NAME", "DB_LOGIN", "DB_PASSWORD"]
+  required_vars = ["DB_SERVER", "DB_NAME", "DB_USER", "DB_PASSWORD"]
 
   missing = [v for v in required_vars if not os.getenv(v)]
 
