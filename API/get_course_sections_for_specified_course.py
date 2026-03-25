@@ -1,8 +1,8 @@
 from get_db_connection import get_db_connection
 
 def get_course_sections_for_specified_course(
-    subject_code: str,
-    course_number: str
+    subject_code: str = None,
+    course_number: str = None
 ):
     conn = get_db_connection()
 

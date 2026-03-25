@@ -6,28 +6,28 @@ from has_student_met_prerequisites_for_course import has_student_met_prerequisit
 
 app = FastAPI()
 
-@app.get("/get_course_sections_for_specified_course/")
+@app.get("/get_course_sections_for_specified_course")
 def get_course_sections_endpoint(
-    subjectCode: str,
-    courseNumber: str
+    subjectCode: str = None,
+    courseNumber: str = None
 ):
     return get_course_sections_for_specified_course(subjectCode, courseNumber)
 
-@app.get("/get_course_prerequisites/")
+@app.get("/get_course_prerequisites")
 def get_course_prerequisites_endpoint(
-    subjectCode: str,
-    courseNumber: str
+    subjectCode: str = None,
+    courseNumber: str = None
 ):
     return get_course_prerequisites(subjectCode, courseNumber)
 
-@app.get("/validate_user/")
+@app.get("/validate_user")
 def validate_user_endpoint(
     username: str,
     password: str
 ):
     return validate_user(username, password)
 
-@app.get("/has_student_met_prerequisites_for_course/")
+@app.get("/has_student_met_prerequisites_for_course")
 def has_student_met_prerequisites_for_course_endpoint(
     studentID: int,
     subjectCode: str,
