@@ -4,9 +4,9 @@ import streamlit as st
 
 FASTAPI_URL = "http://localhost:8000"
 
-def fetch_data(endpoint : str, params : dict, method: str = "get") -> pd.DataFrame:
+def fetch_data(endpoint : str, input_params : dict, method: str = "get") -> pd.DataFrame:
     if method == "get":
-        response = requests.get(f"{FASTAPI_URL}/{endpoint}", params=params)
+        response = requests.get(f"{FASTAPI_URL}/{endpoint}", params=input_params)
 
     if response.status_code == 200:
         payload = response.json()

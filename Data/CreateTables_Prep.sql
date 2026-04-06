@@ -1,7 +1,16 @@
+create login APILogin
+with password = 'MI$T460Instructor'; 
 
-
+GO
 
 use MIST460_RDB_Prep;
+
+CREATE USER APIUser
+FOR LOGIN APILogin;
+
+GRANT EXECUTE TO APIUser;
+GRANT SELECT TO APIUser;
+
 
 go
 
