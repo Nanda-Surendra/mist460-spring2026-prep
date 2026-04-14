@@ -1,4 +1,5 @@
 from get_db_connection import get_db_connection
+import pymssql
 
 def get_course_sections_for_specified_course(
     subject_code: str = None,
@@ -6,8 +7,8 @@ def get_course_sections_for_specified_course(
 ):
     conn = get_db_connection()
 
-    cursor = conn.cursor()
-    cursor.execute("{CALL procGetCourseSectionsForSpecifiedCourse(?, ?)}", subject_code, course_number)
+    cursor = conn.cursor(as_dict=True)
+    cursor.execute("EXEC procGetCourseSectionsForSpecifiedCourse %s, %s", (subject_code, course_number))
     rows = cursor.fetchall()
     cursor.close()
     conn.close()
@@ -15,15 +16,15 @@ def get_course_sections_for_specified_course(
     # Convert rows to a list of dictionaries for better JSON serialization
     results = [
         {
-            "SubjectCode": row.SubjectCode,
-            "CourseNumber": row.CourseNumber,
-            "CourseTitle": row.Title,
-            "CRN": row.CRN,
-            "Semester": row.SectionSemester,
-            "Year": row.SectionYear,
-            "SectionID": row.SectionID,
-            "RemainingOpenings": row.RemainingOpenings,
-            "InstructorName": row.InstructorName
+            "SubjectCode": row["SubjectCode"],
+            "CourseNumber": row["CourseNumber"],
+            "CourseTitle": row["Title"],
+            "CRN": row["CRN"],
+            "Semester": row["SectionSemester"],
+            "Year": row["SectionYear"],
+            "SectionID": row["SectionID"],
+            "RemainingOpenings": row["RemainingOpenings"],
+            "InstructorName": row["InstructorName"]
         }
         for row in rows
     ]
