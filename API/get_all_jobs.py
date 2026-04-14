@@ -1,16 +1,14 @@
 from get_db_connection import get_db_connection
 import pymssql
 
-def get_course_prerequisites(
-    subjectCode: str,
-    courseNumber: str
-):
+def get_all_jobs():
+
     conn = get_db_connection()
     cursor = conn.cursor(as_dict=True)
 
     # Execute the stored procedure
-    #cursor.execute("{call procFindPrerequisites(?, ?)}", (subjectCode, courseNumber))
-    cursor.callproc("procGetCoursePrerequisites", (subjectCode, courseNumber))
+    #cursor.execute("{execute procGetAllJobs}")
+    cursor.callproc("procGetAllJobs")
 
     # Fetch results
     try:
@@ -23,8 +21,7 @@ def get_course_prerequisites(
 
     # Convert to list of dicts
     results = [
-        {"SubjectCode": row["SubjectCode"], "CourseNumber": row["CourseNumber"]}
+        {"JobTitle": row["JobTitle"], "JobDescription": row["JobDescription"]}
         for row in rows
     ]
     return {"data": results}
-

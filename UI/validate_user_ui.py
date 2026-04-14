@@ -10,8 +10,12 @@ def validate_user_ui():
     if st.button("Validate"):
         params = {}
         if username.strip():
+            st.error("Username is required.")
+        else:
             params["username"] = username.strip()
         if password.strip():
+            st.error("Password is required.")
+        else:
             params["password"] = password.strip()
 
         df = fetch_data("validate_user", params)
