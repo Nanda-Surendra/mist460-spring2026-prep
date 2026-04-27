@@ -27,3 +27,7 @@ elif api_end_point == "Get Course Prerequisites":
 elif api_end_point == "Has Student Met Prerequisites For Course":
     get_course_prerequisites_ui()
 
+elif api_end_point == "Get Recommendations for Job Description":
+    get_recommendations_for_job_description_ui()
+    #st.header("Course Recommendations for Job")
+
